@@ -17,25 +17,25 @@ public class Solution {
         
         int count = 0;
         for (int i = 0; i < m; i++) {
-            f[i][0] = count;
             count += grid[i][0];
+            f[i][0] = count;
         }
         
         count = 0;
         for (int i = 0; i < n; i++) {
-            f[0][i] = count;
             count += grid[0][i];
+            f[0][i] = count;
         }
         
         for (int i = 1; i < m; i++) {
             for (int j = 1; j < n; j++) {
-                int up = f[i - 1][j] + grid[i - 1][j];
-                int left = f[i][j - 1] + grid[i][j - 1];
+                int up = f[i - 1][j];
+                int left = f[i][j - 1];
                 
-                f[i][j] = up < left ? up : left;
+                f[i][j] = (up < left ? up : left) + grid[i][j];
             }
         }
         
-        return f[m - 1][n - 1] + grid[m - 1][n - 1];
+        return f[m - 1][n - 1];
     }
 }
